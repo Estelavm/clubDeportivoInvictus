@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">Club Deportivo Invictus</string>
+    <string name="hint_usuario">usuario</string>
+    <string name="hint_contrasena">contraseña</string>
+    <string name="btn_login">LOGIN</string>
+    <string name="text_nombre">nombre</string>
+    <string name="hint_apellido">apellido</string>
+    <string name="text_documento">documento</string>
+    <string name="text_apellido">apellido</string>
+    <string name="text_numero">numero</string>
+    <string name="n_mero">número</string>
+    <string name="hint_ingrese_aqu_su_nombre">Ingrese aquí su nombre</string>
+    <string name="hint_ingrese_aqu_su_apellido">Ingrese aquí su apellido</string>
+    <string name="hint_nro_de_documento">Nro de documento</string>
+
+    <string-array name="tipos_array">
+        <item>DNI</item>
+        <item>LE</item>
+        <item>LC</item>
+    </string-array>
+
+</resources>
+

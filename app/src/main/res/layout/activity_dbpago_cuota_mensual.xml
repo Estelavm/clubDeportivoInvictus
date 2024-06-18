@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg"
+    android:orientation="vertical"
+    tools:context=".DBPagoCuotaMensual">
+
+    <ImageView
+        android:layout_width="780dp"
+        android:layout_height="780dp"
+        android:layout_marginStart="-600dp"
+        android:rotation="0"
+        android:src="@drawable/casco"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/logo"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="30dp"
+            android:src="@drawable/logo"
+            app:shapeAppearanceOverlay="@style/RoundedImageView" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:gravity="center_horizontal"
+            android:text="Ingrese el DNI del Socio"
+            android:textColor="@color/white"
+            android:textSize="26sp" />
+
+        <EditText
+            android:id="@+id/editText1"
+            android:layout_width="160dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="4dp"
+            android:background="@drawable/rounded_edit_text_white"
+            android:inputType="text"
+            android:padding="20dp"
+            android:textColorHint="@color/placeholder"
+            android:textSize="16dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:gravity="center_horizontal"
+            android:text="Monto a pagar"
+            android:textColor="@color/white"
+            android:textSize="26sp" />
+
+        <EditText
+            android:id="@+id/editText2"
+            android:layout_width="160dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="4dp"
+            android:background="@drawable/rounded_edit_text_white"
+            android:inputType="text"
+            android:padding="20dp"
+            android:textColorHint="@color/placeholder"
+            android:textSize="16dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:gravity="center_horizontal"
+            android:text="Forma de pago"
+            android:textColor="@color/white"
+            android:textSize="26sp" />
+
+        <RadioButton
+            android:id="@+id/radioButton"
+            android:layout_width="130dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="Efectivo"
+            android:textColor="#BAB8B8"
+            android:textSize="26sp" />
+
+        <RadioButton
+            android:id="@+id/radioButton2"
+            android:layout_width="130dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="Tarjeta"
+            android:textColor="#BAB8B8"
+            android:textSize="26sp" />
+
+        <Button
+            android:id="@+id/btn_pagar"
+            android:layout_width="150dp"
+            android:layout_height="68dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="30dp"
+            android:backgroundTint="@color/btn"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            android:textColor="@color/white"
+            android:fontFamily="@font/leaguespartan_bold"
+            android:text="PAGAR"
+
+            android:textSize="20sp"
+            app:cornerRadius="16dp"
+            app:strokeWidth=".4dp" />
+
+        <LinearLayout
+            android:layout_width="360dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="30dp"
+            android:orientation="horizontal"
+
+            >
+
+            <Button
+                android:id="@+id/btn_atras"
+                android:layout_width="150dp"
+                android:layout_height="68dp"
+                android:layout_gravity="center_horizontal"
+                android:backgroundTint="@color/btn"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:textColor="@color/white"
+                android:fontFamily="@font/leaguespartan_bold"
+                android:text="Atrás"
+                android:textSize="20sp"
+                app:cornerRadius="16dp"
+                app:strokeWidth=".4dp" />
+
+            <Button
+                android:id="@+id/btn_comprobante"
+                android:layout_width="180dp"
+                android:layout_height="68dp"
+                android:layout_marginStart="30dp"
+                android:backgroundTint="@color/btn"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:textColor="@color/white"
+                android:fontFamily="@font/leaguespartan_bold"
+                android:text="Comprobante"
+                android:textSize="20sp"
+                app:cornerRadius="16dp"
+                app:strokeWidth=".4dp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
