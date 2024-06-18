@@ -137,29 +137,42 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         return userList.toString()
     }
 
-    fun getUserByDNI(dni: String): User? {
+    fun getUserByDNI(docNumber: String): User? {
         val db = readableDatabase
-        val cursor = db.rawQuery("SELECT * FROM $TABLE_USER_DATA WHERE $COLUMN_DOC_NUMBER = ?", arrayOf(dni))
-
         var user: User? = null
+        val cursor = db.rawQuery("SELECT * FROM $TABLE_USER_DATA WHERE $COLUMN_DOC_NUMBER = ?", arrayOf(docNumber))
+
         if (cursor.moveToFirst()) {
             val name = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_NAME))
             val lastName = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_LAST_NAME))
             val docType = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_DOC_TYPE))
+            val docNum = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_DOC_NUMBER))
             val userType = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_USER_TYPE))
 
-            user = User(name, lastName, docType, dni, userType)
+            user = User(name, lastName, docType, docNum, userType)
         }
 
         cursor.close()
         db.close()
-
         return user
     }
 
     fun deleteUserByDNI(dni: String): Int {
         val db = writableDatabase
         val result = db.delete(TABLE_USER_DATA, "$COLUMN_DOC_NUMBER = ?", arrayOf(dni))
+        db.close()
+        return result
+    }
+
+    fun updateUserData(docNumber: String, name: String, lastName: String, docType: String, userType: String): Int {
+        val db = writableDatabase
+        val values = ContentValues().apply {
+            put(COLUMN_NAME, name)
+            put(COLUMN_LAST_NAME, lastName)
+            put(COLUMN_DOC_TYPE, docType)
+            put(COLUMN_USER_TYPE, userType)
+        }
+        val result = db.update(TABLE_USER_DATA, values, "$COLUMN_DOC_NUMBER = ?", arrayOf(docNumber))
         db.close()
         return result
     }

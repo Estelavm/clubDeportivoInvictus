@@ -1,6 +1,7 @@
 package com.example.platzi
 
 import DatabaseHelper
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
@@ -8,6 +9,8 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.platzi.model.User
+
 
 class UserProfileActivity : AppCompatActivity() {
 
@@ -34,6 +37,24 @@ class UserProfileActivity : AppCompatActivity() {
                     textViewUserData.visibility = View.VISIBLE
                     buttonEdit.visibility = View.VISIBLE
                     buttonDelete.visibility = View.VISIBLE
+
+                    buttonEdit.setOnClickListener {
+                        val intent = Intent(this, EditUserActivity::class.java)
+                        intent.putExtra("user", user)
+                        startActivity(intent)
+                    }
+
+                    buttonDelete.setOnClickListener {
+                        val result = dbHelper.deleteUserByDNI(dni)
+                        if (result > 0) {
+                            textViewUserData.visibility = View.GONE
+                            buttonEdit.visibility = View.GONE
+                            buttonDelete.visibility = View.GONE
+                            Toast.makeText(this, "Usuario eliminado", Toast.LENGTH_SHORT).show()
+                        } else {
+                            Toast.makeText(this, "Error al eliminar usuario", Toast.LENGTH_SHORT).show()
+                        }
+                    }
                 } else {
                     textViewUserData.visibility = View.GONE
                     buttonEdit.visibility = View.GONE
@@ -42,25 +63,6 @@ class UserProfileActivity : AppCompatActivity() {
                 }
             } else {
                 Toast.makeText(this, "Ingrese un DNI", Toast.LENGTH_SHORT).show()
-            }
-        }
-
-        buttonEdit.setOnClickListener {
-            // Implementar lógica para editar usuario
-        }
-
-        buttonDelete.setOnClickListener {
-            val dni = editTextDNI.text.toString()
-            if (dni.isNotEmpty()) {
-                val result = dbHelper.deleteUserByDNI(dni)
-                if (result > 0) {
-                    textViewUserData.visibility = View.GONE
-                    buttonEdit.visibility = View.GONE
-                    buttonDelete.visibility = View.GONE
-                    Toast.makeText(this, "Usuario eliminado", Toast.LENGTH_SHORT).show()
-                } else {
-                    Toast.makeText(this, "Error al eliminar usuario", Toast.LENGTH_SHORT).show()
-                }
             }
         }
     }
