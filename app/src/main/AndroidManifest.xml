@@ -42,6 +42,8 @@
         <activity android:name=".UserDetailsActivity"/>
         <activity android:name=".UserListActivity"/>
         <activity android:name=".UserProfileActivity"/>
+        <activity android:name=".EditUserActivity" />
+
         <activity
             android:name=".MainActivity"
             android:exported="true">
