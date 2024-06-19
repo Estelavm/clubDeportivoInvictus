@@ -4,12 +4,14 @@ import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import android.util.Log
 import com.example.platzi.model.User
+import java.text.SimpleDateFormat
+import java.util.*
 
-class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
+class DatabaseHelper private constructor(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
 
     companion object {
         private const val DATABASE_NAME = "UserDatabase.db"
-        private const val DATABASE_VERSION = 2
+        private const val DATABASE_VERSION = 3
         private const val TABLE_USERS = "User"
         private const val COLUMN_ID = "id"
         private const val COLUMN_USERNAME = "username"
@@ -21,6 +23,24 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         private const val COLUMN_DOC_TYPE = "doc_type"
         private const val COLUMN_DOC_NUMBER = "doc_number"
         private const val COLUMN_USER_TYPE = "user_type"
+        private const val COLUMN_MONTHLY_FEE = "monthly_fee"
+        private const val COLUMN_SUBSCRIPTION_ACTIVE = "subscription_active"
+        private const val COLUMN_LAST_PAYMENT_DATE = "last_payment_date"
+
+        @Volatile
+        private var INSTANCE: DatabaseHelper? = null
+
+        fun getInstance(context: Context): DatabaseHelper {
+            return INSTANCE ?: synchronized(this) {
+                val instance = DatabaseHelper(context.applicationContext)
+                INSTANCE = instance
+                instance
+            }
+        }
+    }
+
+    init {
+        Log.d("DatabaseHelper", "Database instance created")
     }
 
     override fun onCreate(db: SQLiteDatabase?) {
@@ -45,17 +65,23 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
                 $COLUMN_NAME TEXT,
                 $COLUMN_LAST_NAME TEXT,
                 $COLUMN_DOC_TYPE TEXT,
-                $COLUMN_USER_TYPE TEXT
+                $COLUMN_USER_TYPE TEXT,
+                $COLUMN_MONTHLY_FEE REAL DEFAULT 5000.0,
+                $COLUMN_SUBSCRIPTION_ACTIVE INTEGER,
+                $COLUMN_LAST_PAYMENT_DATE TEXT
             )
         """
         db?.execSQL(createUserDataTable)
-        Log.d("DatabaseHelper", "onCreate: Tables created successfully")
+
+        Log.d("DatabaseHelper", "Tables created successfully")
     }
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
-        db?.execSQL("DROP TABLE IF EXISTS $TABLE_USERS")
-        db?.execSQL("DROP TABLE IF EXISTS $TABLE_USER_DATA")
-        onCreate(db)
+        if (oldVersion < 3) {
+            db?.execSQL("ALTER TABLE $TABLE_USER_DATA ADD COLUMN $COLUMN_MONTHLY_FEE REAL DEFAULT 50.0;")
+            db?.execSQL("ALTER TABLE $TABLE_USER_DATA ADD COLUMN $COLUMN_SUBSCRIPTION_ACTIVE INTEGER DEFAULT 1;")
+            db?.execSQL("ALTER TABLE $TABLE_USER_DATA ADD COLUMN $COLUMN_LAST_PAYMENT_DATE TEXT;")
+        }
     }
 
     fun validateUser(username: String, password: String): Boolean {
@@ -75,10 +101,28 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
             put(COLUMN_DOC_TYPE, docType)
             put(COLUMN_DOC_NUMBER, docNumber)
             put(COLUMN_USER_TYPE, userType)
+            put(COLUMN_MONTHLY_FEE, 50.0) // Ejemplo de valor fijo de cuota mensual
+            put(COLUMN_SUBSCRIPTION_ACTIVE, 1)
+            put(COLUMN_LAST_PAYMENT_DATE, getCurrentDate())
         }
         val id = db.insert(TABLE_USER_DATA, null, values)
         db.close()
         return id
+    }
+
+    private fun getCurrentDate(): String {
+        val sdf = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+        return sdf.format(Date())
+    }
+
+    fun updatePaymentStatus(docNumber: String) {
+        val db = writableDatabase
+        val values = ContentValues().apply {
+            put(COLUMN_SUBSCRIPTION_ACTIVE, 1)
+            put(COLUMN_LAST_PAYMENT_DATE, getCurrentDate())
+        }
+        db.update(TABLE_USER_DATA, values, "$COLUMN_DOC_NUMBER = ?", arrayOf(docNumber))
+        db.close()
     }
 
     fun getAllUsersList(): List<User> {
@@ -175,5 +219,34 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         val result = db.update(TABLE_USER_DATA, values, "$COLUMN_DOC_NUMBER = ?", arrayOf(docNumber))
         db.close()
         return result
+    }
+
+    fun getUserPaymentStatus(docNumber: String): Boolean {
+        val db = readableDatabase
+        val cursor = db.rawQuery("SELECT $COLUMN_SUBSCRIPTION_ACTIVE FROM $TABLE_USER_DATA WHERE $COLUMN_DOC_NUMBER = ?", arrayOf(docNumber))
+        var isActive = false
+        if (cursor.moveToFirst()) {
+            isActive = cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_SUBSCRIPTION_ACTIVE)) == 1
+        }
+        cursor.close()
+        db.close()
+        return isActive
+    }
+
+    fun getMonthlyFee(docNumber: String): Double {
+        val db = readableDatabase
+        val cursor = db.rawQuery("SELECT $COLUMN_MONTHLY_FEE FROM $TABLE_USER_DATA WHERE $COLUMN_DOC_NUMBER = ?", arrayOf(docNumber))
+        var fee = 50.0
+        if (cursor.moveToFirst()) {
+            fee = cursor.getDouble(cursor.getColumnIndexOrThrow(COLUMN_MONTHLY_FEE))
+        }
+        cursor.close()
+        db.close()
+        return fee
+    }
+
+    override fun close() {
+        INSTANCE = null
+        super.close()
     }
 }

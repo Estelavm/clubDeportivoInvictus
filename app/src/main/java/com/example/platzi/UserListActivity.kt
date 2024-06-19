@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.platzi.adapter.UserAdapter
 
 class UserListActivity : AppCompatActivity() {
+    private lateinit var db: DatabaseHelper
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -18,8 +19,8 @@ class UserListActivity : AppCompatActivity() {
         val recyclerView: RecyclerView = findViewById(R.id.recyclerView)
         recyclerView.layoutManager = LinearLayoutManager(this)
 
-        val dbHelper = DatabaseHelper(this)
-        val userList = dbHelper.getAllUsersList()
+        db = DatabaseHelper.getInstance(this)
+        val userList = db.getAllUsersList()
 
         val adapter = UserAdapter(userList)
         recyclerView.adapter = adapter

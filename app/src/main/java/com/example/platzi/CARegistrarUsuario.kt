@@ -13,8 +13,6 @@ import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.imageview.ShapeableImageView
-import java.text.SimpleDateFormat
-import java.util.*
 
 class CARegistrarUsuario : AppCompatActivity() {
 
@@ -24,7 +22,7 @@ class CARegistrarUsuario : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_caregistrar_usuario)
-        databaseHelper = DatabaseHelper(this)
+        databaseHelper = DatabaseHelper.getInstance(this)
 
         val logoImageView: ShapeableImageView = findViewById(R.id.logo)
         logoImageView.setOnClickListener {
@@ -49,21 +47,12 @@ class CARegistrarUsuario : AppCompatActivity() {
                 if (id != -1L) {
                     Toast.makeText(this, "User registered successfully", Toast.LENGTH_SHORT).show()
 
-                    if (isSocio) {
-                        val intent = Intent(this, CBCarnetDelSocio::class.java).apply {
-                            putExtra("nombreCompleto", "$name $lastName")
-                            putExtra("tipoDocumento", docType)
-                            putExtra("numeroDocumento", docNumber)
-                        }
-                        startActivity(intent)
+                    val intent = if (isSocio) {
+                        Intent(this, DAPagoSocio::class.java)
                     } else {
-                        val intent = Intent(this, EBDatosNoSocio::class.java).apply {
-                            putExtra("nombreCompleto", "$name $lastName")
-                            putExtra("tipoDocumento", docType)
-                            putExtra("numeroDocumento", docNumber)
-                        }
-                        startActivity(intent)
+                        Intent(this, FARegistroDeActividad::class.java)
                     }
+                    startActivity(intent)
                 } else {
                     Toast.makeText(this, "Error registering user", Toast.LENGTH_SHORT).show()
                 }
@@ -96,24 +85,3 @@ class CARegistrarUsuario : AppCompatActivity() {
         super.onDestroy()
     }
 }
-
-
-
-//val listaLenguajes = arrayOf("Seleccione un lenguaje", "Kotlin", "Java", "C++", "PHP")
-//
-//var adaptador: ArrayAdapter<String> = ArrayAdapter(this, listaLenguajes)
-//spLenguajes?.adapter = adaptador
-//
-//spLenguajes?.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-//    override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
-//        if (position > 0) {
-//            tvSeleccion?.text = "Seleccionaste " + spLenguajes?.getSelectedItem().toString()
-//        } else {
-//            tvSeleccion?.text = "No haz seleccionado ningún lenguaje de programación"
-//        }
-//    }
-//
-//    override fun onNothingSelected(parent: AdapterView<*>) {
-//        tvSeleccion?.text = "No haz seleccionado ningún lenguaje de programación"
-//    }
-//}

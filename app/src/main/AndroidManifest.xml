@@ -43,6 +43,7 @@
         <activity android:name=".UserListActivity"/>
         <activity android:name=".UserProfileActivity"/>
         <activity android:name=".EditUserActivity" />
+        <activity android:name=".ComprobantePagoActivity" />
 
         <activity
             android:name=".MainActivity"

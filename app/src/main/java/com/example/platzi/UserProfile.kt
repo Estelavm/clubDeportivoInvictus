@@ -14,13 +14,13 @@ import com.example.platzi.model.User
 
 class UserProfileActivity : AppCompatActivity() {
 
-    private lateinit var dbHelper: DatabaseHelper
+    private lateinit var db: DatabaseHelper
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user_profile)
 
-        dbHelper = DatabaseHelper(this)
+        db = DatabaseHelper.getInstance(this)
 
         val editTextDNI: EditText = findViewById(R.id.editTextDNI)
         val buttonSearch: Button = findViewById(R.id.buttonSearch)
@@ -31,7 +31,7 @@ class UserProfileActivity : AppCompatActivity() {
         buttonSearch.setOnClickListener {
             val dni = editTextDNI.text.toString()
             if (dni.isNotEmpty()) {
-                val user = dbHelper.getUserByDNI(dni)
+                val user = db.getUserByDNI(dni)
                 if (user != null) {
                     textViewUserData.text = "Name: ${user.name} ${user.lastName}\nDocument: ${user.docType} ${user.docNumber}\nType: ${user.userType}"
                     textViewUserData.visibility = View.VISIBLE
@@ -45,7 +45,7 @@ class UserProfileActivity : AppCompatActivity() {
                     }
 
                     buttonDelete.setOnClickListener {
-                        val result = dbHelper.deleteUserByDNI(dni)
+                        val result = db.deleteUserByDNI(dni)
                         if (result > 0) {
                             textViewUserData.visibility = View.GONE
                             buttonEdit.visibility = View.GONE

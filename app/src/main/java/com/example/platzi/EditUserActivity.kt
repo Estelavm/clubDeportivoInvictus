@@ -10,14 +10,14 @@ import com.example.platzi.model.User
 
 class EditUserActivity : AppCompatActivity() {
 
-    private lateinit var dbHelper: DatabaseHelper
+    private lateinit var db: DatabaseHelper
     private lateinit var docNumber: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_edit_user)
 
-        dbHelper = DatabaseHelper(this)
+        db = DatabaseHelper.getInstance(this)
 
         val editTextName: EditText = findViewById(R.id.editTextName)
         val editTextLastName: EditText = findViewById(R.id.editTextLastName)
@@ -43,7 +43,7 @@ class EditUserActivity : AppCompatActivity() {
             val docNumber = editTextDocNumber.text.toString()
             val userType = editTextUserType.text.toString()
 
-            val result = dbHelper.updateUserData(docNumber, name, lastName, docType, userType)
+            val result = db.updateUserData(docNumber, name, lastName, docType, userType)
             if (result > 0) {
                 Toast.makeText(this, "Usuario actualizado", Toast.LENGTH_SHORT).show()
                 finish()
