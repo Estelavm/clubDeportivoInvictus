@@ -10,95 +10,80 @@
     tools:context=".DCMorosos">
 
     <ImageView
-        android:layout_width="380dp"
-        android:layout_height="480dp"
-        android:layout_marginStart="360dp"
-        android:layout_marginTop="-180dp"
-        android:rotation="36"
-        android:rotationY="180"
-        android:src="@drawable/casco"
+        android:id="@+id/logo"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="24dp"
+        android:src="@drawable/logo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <TextView
+        android:id="@+id/textViewTitulo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:shadowColor="@color/black"
+        android:text="Listado de morosos:"
+        android:textColor="@color/white"
+        android:textSize="28sp"
+        app:layout_constraintTop_toBottomOf="@id/logo"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp"/>
+
+    <GridLayout
+        android:id="@+id/gridLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:columnCount="2"
+        app:layout_constraintTop_toBottomOf="@id/textViewTitulo"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp"
+        android:padding="16dp">
+
+        <!-- Aquí se agregarán dinámicamente los TextViews -->
+
+    </GridLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@id/gridLayout"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp"
+        android:gravity="center_horizontal">
 
-        <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/logo"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_margin="24dp"
-            android:src="@drawable/logo"
-            app:shapeAppearanceOverlay="@style/RoundedImageView" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:shadowColor="@color/black"
-            android:text="Listado de morosos:"
+        <Button
+            android:id="@+id/btn_atras"
+            android:layout_width="150dp"
+            android:layout_height="68dp"
+            android:text="Atrás"
+            android:textSize="20sp"
             android:textColor="@color/white"
-            android:textSize="28sp" />
+            android:fontFamily="@font/leaguespartan_bold"
+            android:backgroundTint="@color/btn"
+            app:cornerRadius="16dp"
+            app:strokeWidth=".4dp"
+            android:layout_marginEnd="8dp"/>
 
-        <EditText
-            android:layout_width="360dp"
-            android:layout_height="400dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="4dp"
-            android:background="@drawable/rounded_edit_text_white"
-            android:inputType="text"
-            android:padding="20dp"
-            android:textColorHint="@color/placeholder"
-            android:textSize="16dp" />
-
-        <LinearLayout
-            android:layout_width="360dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="30dp"
-            android:orientation="horizontal"
-
-            >
-
-            <Button
-                android:id="@+id/btn_atras"
-                android:layout_width="150dp"
-                android:layout_height="68dp"
-                android:layout_gravity="center_horizontal"
-                android:backgroundTint="@color/btn"
-                android:insetTop="0dp"
-                android:insetBottom="0dp"
-                android:textColor="@color/white"
-                android:fontFamily="@font/leaguespartan_bold"
-                android:text="Atrás"
-                android:textSize="20sp"
-                app:cornerRadius="16dp"
-                app:strokeWidth=".4dp" />
-
-            <Button
-                android:id="@+id/btn_comprobante"
-                android:layout_width="180dp"
-                android:layout_height="68dp"
-                android:layout_marginStart="30dp"
-                android:backgroundTint="@color/btn"
-                android:insetTop="0dp"
-                android:insetBottom="0dp"
-                android:textColor="@color/white"
-                android:fontFamily="@font/leaguespartan_bold"
-                android:text="Comprobante"
-                android:textSize="20sp"
-                app:cornerRadius="16dp"
-                app:strokeWidth=".4dp" />
-
-        </LinearLayout>
+        <Button
+            android:id="@+id/btn_comprobante"
+            android:layout_width="180dp"
+            android:layout_height="68dp"
+            android:text="Imprimir"
+            android:textSize="20sp"
+            android:textColor="@color/white"
+            android:fontFamily="@font/leaguespartan_bold"
+            android:backgroundTint="@color/btn"
+            app:cornerRadius="16dp"
+            app:strokeWidth=".4dp"
+            android:layout_marginStart="8dp"/>
 
     </LinearLayout>
 

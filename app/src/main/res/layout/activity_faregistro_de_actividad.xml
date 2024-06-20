@@ -274,7 +274,7 @@
                 android:layout_marginStart="16dp">
 
                 <RadioButton
-                    android:id="@+id/radioEfectivo"
+                    android:id="@+id/radio_efectivo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Efectivo"
@@ -282,7 +282,7 @@
                     android:textSize="16sp" />
 
                 <RadioButton
-                    android:id="@+id/radioTarjeta"
+                    android:id="@+id/radio_tarjeta"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Tarjeta"

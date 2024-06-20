@@ -9,7 +9,9 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.RadioButton
 import android.widget.RadioGroup
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.platzi.ComprobantePagoActivity
 
 class FARegistroDeActividad : AppCompatActivity() {
 
@@ -20,6 +22,8 @@ class FARegistroDeActividad : AppCompatActivity() {
     private lateinit var voleyCheckBox: CheckBox
     private lateinit var dniEditText: EditText
     private lateinit var totalToPayTextView: TextView
+    private lateinit var formaDePagoEfectivoRadioButton: RadioButton
+    private lateinit var formaDePagoTarjetaRadioButton: RadioButton
 
     private var totalToPay: Double = 0.0
 
@@ -49,20 +53,28 @@ class FARegistroDeActividad : AppCompatActivity() {
         voleyCheckBox = findViewById(R.id.check_voley)
         dniEditText = findViewById(R.id.editText1)
         totalToPayTextView = findViewById(R.id.total_to_pay)
+        formaDePagoEfectivoRadioButton = findViewById(R.id.radio_efectivo)
+        formaDePagoTarjetaRadioButton = findViewById(R.id.radio_tarjeta)
+
 
         // Manejar clics en el botón PAGAR
         val pagarButton: Button = findViewById(R.id.btn_imprimir)
         pagarButton.setOnClickListener {
             val dni = dniEditText.text.toString().trim()
 
-            // Verificar que se haya ingresado un DNI válido
             if (dni.isNotEmpty()) {
-                val intent = Intent(this, FBPagoActividad::class.java)
-                intent.putExtra("dni", dni)
+                val actividadesSeleccionadas = obtenerActividadesSeleccionadas()
+                val formaDePago = if (formaDePagoEfectivoRadioButton.isChecked) "Efectivo" else "Tarjeta"
+                val intent = Intent(this, ComprobantePagoActivity::class.java).apply {
+                    putExtra("dni", dni)
+                    putExtra("actividades", actividadesSeleccionadas)
+                    putExtra("formaDePago", formaDePago)
+                    putExtra("monto", totalToPay)
+                }
                 startActivity(intent)
+
             } else {
-                // Mostrar mensaje de error o realizar alguna acción según tu flujo
-                // por ejemplo: Toast.makeText(this, "Ingrese un DNI válido", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Ingrese un DNI válido", Toast.LENGTH_SHORT).show()
             }
         }
 
@@ -118,6 +130,16 @@ class FARegistroDeActividad : AppCompatActivity() {
     }
     private fun updateTotalToPay() {
         totalToPayTextView.text = getString(R.string.total_to_pay, totalToPay)
+    }
+
+    private fun obtenerActividadesSeleccionadas(): String {
+        val actividades = mutableListOf<String>()
+        if (basketCheckBox.isChecked) actividades.add("BASQUET")
+        if (futbolCheckBox.isChecked) actividades.add("FUTBOL")
+        if (natacionCheckBox.isChecked) actividades.add("NATACION")
+        if (tenisCheckBox.isChecked) actividades.add("TENIS")
+        if (voleyCheckBox.isChecked) actividades.add("VOLEY")
+        return actividades.joinToString(", ")
     }
 
 }

@@ -1,4 +1,4 @@
-<!-- activity_comprobante_pago.xml -->
+<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -13,17 +13,17 @@
         android:textStyle="bold"/>
 
     <TextView
-        android:id="@+id/txtNombreDocumento"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Nombre del Documento: "
-        android:textStyle="bold"/>
-
-    <TextView
         android:id="@+id/txtFecha"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Fecha: "
+        android:text="Fecha de Pago: "
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/txtFormaDePago"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Forma de Pago: "
         android:textStyle="bold"/>
 
     <TextView
@@ -44,7 +44,7 @@
         android:id="@+id/txtDetalle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Detalle: "
+        android:text="Actividades: "
         android:textStyle="bold"/>
 
     <TextView
