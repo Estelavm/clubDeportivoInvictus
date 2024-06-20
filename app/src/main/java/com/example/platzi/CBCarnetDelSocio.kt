@@ -7,15 +7,14 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import java.text.SimpleDateFormat
-import java.util.*
 
 class CBCarnetDelSocio : AppCompatActivity() {
-
+    private lateinit var db: DatabaseHelper
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_cbcarnet_del_socio)
         enableEdgeToEdge()
+        db = DatabaseHelper.getInstance(this)
 
         val logoButton: ImageView = findViewById(R.id.logo)
         logoButton.setOnClickListener {
@@ -27,23 +26,28 @@ class CBCarnetDelSocio : AppCompatActivity() {
             startActivity(Intent(this, CARegistrarUsuario::class.java))
         }
 
-        // Obtener datos del intent
-        val intent = intent
-        val nombreCompleto = intent.getStringExtra("nombreCompleto")
-        val tipoDocumento = intent.getStringExtra("tipoDocumento")
-        val numeroDocumento = intent.getStringExtra("numeroDocumento")
-
-        // Mostrar datos en la actividad
-        // Mostrar datos en la actividad
         val textViewNombre: TextView = findViewById(R.id.textView_nombre)
-        textViewNombre.text = "Nombre completo: $nombreCompleto"
-
         val textViewNDocumento: TextView = findViewById(R.id.textView_n_documento)
-        textViewNDocumento.text = "N° de documento: $tipoDocumento - $numeroDocumento"
+        val regDateTextView: TextView = findViewById(R.id.textView_fecha_ingreso)
 
-        val textViewFechaIngreso: TextView = findViewById(R.id.textView_fecha_ingreso)
-        val dateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
-        val fechaActual = dateFormat.format(Date())
-        textViewFechaIngreso.text = "Fecha de inscripción: $fechaActual"
+        // Obtener los datos del usuario de alguna manera (por ejemplo, desde intent extras)
+        val nombreCompleto = intent.getStringExtra("nombreCompleto") ?: ""
+        val tipoYNumeroDocumento = intent.getStringExtra("tipoYNumeroDocumento") ?: ""
+        val docNumber = intent.getStringExtra("docNumber") ?: ""
+
+        // Aquí debes obtener el usuario desde la base de datos usando com.example.platzi.DatabaseHelper
+        val user = db.getUserByDNI(docNumber)
+
+        if (user != null) {
+            // Mostrar los datos en las vistas correspondientes
+            textViewNombre.text = "Nombre: ${user.name} ${user.lastName}"
+            textViewNDocumento.text = "N° Documento: ${user.docType} ${user.docNumber}"
+            regDateTextView.text = "Fecha de ingreso: ${user.regDate}"
+        } else {
+            // Manejar el caso donde el usuario no se encuentra en la base de datos
+            textViewNombre.text = "Usuario no encontrado"
+            textViewNDocumento.text = ""
+            regDateTextView.text = ""
+        }
     }
 }

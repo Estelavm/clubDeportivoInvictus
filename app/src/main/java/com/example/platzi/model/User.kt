@@ -8,9 +8,11 @@ data class User(
     val lastName: String,
     val docType: String,
     val docNumber: String,
-    val userType: String
+    val userType: String,
+    val regDate: String
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
+        parcel.readString() ?: "",
         parcel.readString() ?: "",
         parcel.readString() ?: "",
         parcel.readString() ?: "",
@@ -24,6 +26,7 @@ data class User(
         parcel.writeString(docType)
         parcel.writeString(docNumber)
         parcel.writeString(userType)
+        parcel.writeString(regDate)
     }
 
     override fun describeContents(): Int {

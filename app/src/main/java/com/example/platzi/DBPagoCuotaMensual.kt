@@ -1,11 +1,13 @@
 package com.example.platzi
 
-import DatabaseHelper
+import android.content.ContentValues
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
+import android.widget.RadioButton
+import android.widget.RadioGroup
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -15,6 +17,7 @@ import java.util.Locale
 
 class DBPagoCuotaMensual : AppCompatActivity() {
     private lateinit var db: DatabaseHelper
+    private lateinit var btnVerCarnet: Button
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -22,14 +25,12 @@ class DBPagoCuotaMensual : AppCompatActivity() {
         db = DatabaseHelper.getInstance(this)
 
         val logoButton: ImageView = findViewById(R.id.logo)
-
         logoButton.setOnClickListener {
             val intent = Intent(this, BPrincipalActivity::class.java)
             startActivity(intent)
         }
 
         val atrasButton: Button = findViewById(R.id.btn_atras)
-
         atrasButton.setOnClickListener {
             val intent = Intent(this, DAPagoSocio::class.java)
             startActivity(intent)
@@ -38,12 +39,15 @@ class DBPagoCuotaMensual : AppCompatActivity() {
         val btnPagar: Button = findViewById(R.id.btn_pagar)
         val editTextDni: EditText = findViewById(R.id.editText1)
         val editTextMonto: EditText = findViewById(R.id.editText2)
+        btnVerCarnet = findViewById(R.id.btn_ver_carnet)
+        val radioGroup: RadioGroup = findViewById(R.id.radioGroup)
+        val radioButtonEfectivo: RadioButton = findViewById(R.id.radioButton)
+        val radioButtonTarjeta: RadioButton = findViewById(R.id.radioButton2)
 
         editTextDni.setOnFocusChangeListener { _, hasFocus ->
             if (!hasFocus) {
                 val dni = editTextDni.text.toString().trim()
                 if (dni.isNotEmpty()) {
-                    // Obtener la cuota mensual del usuario
                     val monthlyFee = db.getMonthlyFee(dni)
                     editTextMonto.setText(monthlyFee.toString())
                 }
@@ -55,22 +59,22 @@ class DBPagoCuotaMensual : AppCompatActivity() {
             val monto = editTextMonto.text.toString().toDoubleOrNull() ?: 0.0
 
             if (dni.isNotEmpty() && monto > 0) {
-                // Verificar si el usuario existe en la base de datos
                 val user = db.getUserByDNI(dni)
                 if (user != null) {
-                    // Actualizar el estado de pago y la fecha de último pago
-                    db.updatePaymentStatus(dni)
-                    // Registrar el pago mensual en la base de datos
-                    val id = db.insertUserData(
+                    db.updatePaymentStatus(dni) // Actualiza el estado de pago del usuario
+                    val success = db.insertOrUpdateUserData(
                         user.name,
                         user.lastName,
                         user.docType,
                         dni,
                         user.userType
                     )
-
-                    // Actualizar la UI o mostrar un mensaje de éxito
-                    Toast.makeText(this, "Pago realizado con éxito", Toast.LENGTH_SHORT).show()
+                    if (success) {
+                        Toast.makeText(this, "Pago realizado con éxito", Toast.LENGTH_SHORT).show()
+                        btnVerCarnet.visibility = Button.VISIBLE
+                    } else {
+                        Toast.makeText(this, "Error al actualizar datos del usuario", Toast.LENGTH_SHORT).show()
+                    }
                 } else {
                     Toast.makeText(this, "Usuario no encontrado", Toast.LENGTH_SHORT).show()
                 }
@@ -87,14 +91,14 @@ class DBPagoCuotaMensual : AppCompatActivity() {
         comprobanteButton.setOnClickListener {
             val dni = editTextDni.text.toString().trim()
             val user = db.getUserByDNI(dni)
-            val monto = editTextMonto.text.toString().toDoubleOrNull() ?: 0.0 // Definir monto aquí
+            val monto = editTextMonto.text.toString().toDoubleOrNull() ?: 0.0
 
             if (user != null) {
                 val intent = Intent(this, ComprobantePagoActivity::class.java).apply {
-                    putExtra("numeroDocumento", dni) // Usamos el DNI como número de documento
+                    putExtra("numeroDocumento", dni)
                     putExtra("nombreDocumento", "${user.name} ${user.lastName}")
                     putExtra("fecha", getCurrentDate())
-                    putExtra("emisor", "Datos del Emisor") // Puedes ajustar estos valores según tus necesidades
+                    putExtra("emisor", "Datos del Emisor")
                     putExtra("receptor", "Datos del Receptor")
                     putExtra("detalle", "Pago mensual de cuota")
                     putExtra("monto", monto)
@@ -104,6 +108,24 @@ class DBPagoCuotaMensual : AppCompatActivity() {
                 Toast.makeText(this, "Usuario no encontrado", Toast.LENGTH_SHORT).show()
             }
         }
+
+        btnVerCarnet.setOnClickListener {
+            val dni = editTextDni.text.toString().trim()
+            val user = db.getUserByDNI(dni)
+
+            if (user != null) {
+                val intent = Intent(this, CBCarnetDelSocio::class.java).apply {
+                    putExtra("nombreCompleto", "${user.name} ${user.lastName}")
+                    putExtra("tipoYNumeroDocumento", "${user.docType} $dni")
+                    putExtra("fechaRegistro", user.regDate)
+                    putExtra("docNumber", dni) // Asegúrate de pasar el docNumber
+                }
+                startActivity(intent)
+            } else {
+                Toast.makeText(this, "Usuario no encontrado", Toast.LENGTH_SHORT).show()
+            }
+        }
+
     }
 
     private fun getCurrentDate(): String {

@@ -1,6 +1,5 @@
 package com.example.platzi
 
-import DatabaseHelper
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button

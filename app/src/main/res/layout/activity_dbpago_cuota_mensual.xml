@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/bg"
-    android:orientation="vertical"
     tools:context=".DBPagoCuotaMensual">
 
     <ImageView
@@ -90,23 +90,31 @@
             android:textColor="@color/white"
             android:textSize="26sp" />
 
-        <RadioButton
-            android:id="@+id/radioButton"
-            android:layout_width="130dp"
+        <!-- Agregamos el ID al RadioGroup -->
+        <RadioGroup
+            android:id="@+id/radioGroup"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:text="Efectivo"
-            android:textColor="#BAB8B8"
-            android:textSize="26sp" />
+            android:gravity="center_horizontal">
 
-        <RadioButton
-            android:id="@+id/radioButton2"
-            android:layout_width="130dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:text="Tarjeta"
-            android:textColor="#BAB8B8"
-            android:textSize="26sp" />
+            <RadioButton
+                android:id="@+id/radioButton"
+                android:layout_width="130dp"
+                android:layout_height="wrap_content"
+                android:text="Efectivo"
+                android:textColor="#BAB8B8"
+                android:textSize="26sp" />
+
+            <RadioButton
+                android:id="@+id/radioButton2"
+                android:layout_width="130dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:text="Tarjeta"
+                android:textColor="#BAB8B8"
+                android:textSize="26sp" />
+        </RadioGroup>
 
         <Button
             android:id="@+id/btn_pagar"
@@ -160,8 +168,24 @@
                 android:textSize="20sp"
                 app:cornerRadius="16dp"
                 app:strokeWidth=".4dp" />
-
         </LinearLayout>
+
+        <Button
+            android:id="@+id/btn_ver_carnet"
+            android:layout_width="150dp"
+            android:layout_height="68dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="20dp"
+            android:backgroundTint="@color/btn"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            android:textColor="@color/white"
+            android:fontFamily="@font/leaguespartan_bold"
+            android:text="Ver Carnet"
+            android:textSize="20sp"
+            android:visibility="gone"
+            app:cornerRadius="16dp"
+            app:strokeWidth=".4dp" />
 
     </LinearLayout>
 

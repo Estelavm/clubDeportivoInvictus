@@ -1,6 +1,5 @@
 package com.example.platzi
 
-import DatabaseHelper
 import android.content.Intent
 import android.os.Bundle
 import android.widget.AdapterView
@@ -43,12 +42,13 @@ class CARegistrarUsuario : AppCompatActivity() {
             val isSocio = findViewById<RadioButton>(R.id.radio_socio).isChecked
 
             if (name.isNotEmpty() && lastName.isNotEmpty() && docType.isNotEmpty() && docNumber.isNotEmpty()) {
-                val id = databaseHelper.insertUserData(name, lastName, docType, docNumber, if (isSocio) "Socio" else "No Socio")
-                if (id != -1L) {
+                val isInserted = databaseHelper.insertOrUpdateUserData(name, lastName, docType, docNumber, if (isSocio) "Socio" else "No Socio")
+
+                if (isInserted) { // Aquí usamos directamente el booleano devuelto por insertOrUpdateUserData
                     Toast.makeText(this, "User registered successfully", Toast.LENGTH_SHORT).show()
 
                     val intent = if (isSocio) {
-                        Intent(this, DAPagoSocio::class.java)
+                        Intent(this, DBPagoCuotaMensual::class.java)
                     } else {
                         Intent(this, FARegistroDeActividad::class.java)
                     }
