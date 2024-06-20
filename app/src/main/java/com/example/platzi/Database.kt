@@ -301,6 +301,29 @@ class DatabaseHelper private constructor(context: Context) : SQLiteOpenHelper(co
         return fee
     }
 
+    fun getNombreYApellidoPorDNI(docNumber: String): Pair<String?, String?> {
+        val db = readableDatabase
+        val columns = arrayOf(COLUMN_NAME, COLUMN_LAST_NAME)
+        val selection = "$COLUMN_DOC_NUMBER = ?"
+        val selectionArgs = arrayOf(docNumber)
+        var nombre: String? = null
+        var apellido: String? = null
+
+        val cursor = db.query(TABLE_USER_DATA, columns, selection, selectionArgs, null, null, null)
+
+        cursor.use {
+            if (it.moveToFirst()) {
+                nombre = it.getString(it.getColumnIndexOrThrow(COLUMN_NAME))
+                apellido = it.getString(it.getColumnIndexOrThrow(COLUMN_LAST_NAME))
+            }
+        }
+
+        db.close()
+
+        return Pair(nombre, apellido)
+    }
+
+
     override fun close() {
         INSTANCE = null
         super.close()
