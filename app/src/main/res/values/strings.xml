@@ -12,6 +12,8 @@
     <string name="hint_ingrese_aqu_su_nombre">Ingrese aquí su nombre</string>
     <string name="hint_ingrese_aqu_su_apellido">Ingrese aquí su apellido</string>
     <string name="hint_nro_de_documento">Nro de documento</string>
+    <string name="total_to_pay">Total a pagar: $%.2f</string>
+
 
     <string-array name="tipos_array">
         <item>DNI</item>
