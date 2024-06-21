@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="@color/bg"
     android:orientation="vertical"
-    tools:context=".FBPagoActividad">
+    tools:context=".MembershipPaymentReceipt">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -77,14 +77,6 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_margin="20dp"
-                            android:fontFamily="@font/leaguespartan"
-                            android:text="Fecha:"
-                            android:textSize="16sp" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
                             android:layout_marginBottom="8dp"
                             android:fontFamily="@font/leaguespartan"
                             android:text="Comprobante de Pago"
@@ -123,46 +115,84 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent">
 
-                        <TextView
-                            android:layout_width="wrap_content"
+                        <GridLayout
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginBottom="20dp"
-                            android:fontFamily="@font/leaguespartan_bold"
-                            android:text="Nombre:"
-                            android:textSize="16sp" />
+                            android:columnCount="2"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginTop="30dp">
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="20dp"
-                            android:fontFamily="@font/leaguespartan_bold"
-                            android:text="Fecha de pago:"
-                            android:textSize="16sp" />
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/leaguespartan_bold"
+                                android:text="Nombre:"
+                                android:textSize="16sp" />
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="20dp"
-                            android:fontFamily="@font/leaguespartan_bold"
-                            android:text="Forma de pago:"
-                            android:textSize="16sp" />
+                            <TextView
+                                android:id="@+id/txtNombreApellido"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/leaguespartan"
+                                android:textSize="16sp" />
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="40dp"
-                            android:fontFamily="@font/leaguespartan_bold"
-                            android:text="Monto:"
-                            android:textSize="16sp" />
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/leaguespartan_bold"
+                                android:text="Fecha de pago:"
+                                android:textSize="16sp" />
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/leaguespartan_bold"
-                            android:text="Observaciones:"
-                            android:textSize="16sp" />
+                            <TextView
+                                android:id="@+id/txtFechaPago"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/leaguespartan"
+                                android:textSize="16sp" />
 
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/leaguespartan_bold"
+                                android:text="Forma de pago:"
+                                android:textSize="16sp" />
 
+                            <TextView
+                                android:id="@+id/txtFormaDePago"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/leaguespartan"
+                                android:textSize="16sp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/leaguespartan_bold"
+                                android:text="Monto:"
+                                android:textSize="16sp" />
+
+                            <TextView
+                                android:id="@+id/txtMonto"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/leaguespartan"
+                                android:textSize="16sp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/leaguespartan_bold"
+                                android:text="Observaciones:"
+                                android:textSize="16sp" />
+
+                            <TextView
+                                android:id="@+id/txtObservaciones"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/leaguespartan_bold"
+                                android:textSize="16sp" />
+
+                        </GridLayout>
                     </LinearLayout>
 
 
