@@ -37,13 +37,6 @@ class BPrincipalActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        val buttonNavigate: Button = findViewById(R.id.buttonNavigate)
-        buttonNavigate.setOnClickListener {
-            // Crear un intent para navegar a UserListActivity
-            val intent = Intent(this, UserListActivity::class.java)
-            startActivity(intent)
-        }
-
         val buttonPerfilUsuario: Button = findViewById(R.id.btn_perfil_usuario)
         buttonPerfilUsuario.setOnClickListener {
             val intent = Intent(this, UserProfileActivity::class.java)

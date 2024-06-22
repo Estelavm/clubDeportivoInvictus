@@ -61,13 +61,23 @@ class CARegistrarUsuario : AppCompatActivity() {
             }
         }
 
+        val limpiarButton = findViewById<Button>(R.id.btn_limpiar)
+        limpiarButton.setOnClickListener {
+            findViewById<EditText>(R.id.editText_nombre).text.clear()
+            findViewById<EditText>(R.id.editText2).text.clear()
+            findViewById<EditText>(R.id.editText3).text.clear()
+            findViewById<RadioButton>(R.id.radio_socio).isChecked = false
+            findViewById<RadioButton>(R.id.radio_no_socio).isChecked = false
+            findViewById<Spinner>(R.id.spinner_tipo).setSelection(0)
+        }
+
         val spinner = findViewById<Spinner>(R.id.spinner_tipo)
         ArrayAdapter.createFromResource(
             this,
             R.array.tipos_array,
-            android.R.layout.simple_spinner_item
+            R.layout.spinner_items
         ).also { adapter ->
-            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            adapter.setDropDownViewResource(R.layout.spinner_items)
             spinner.adapter = adapter
         }
 

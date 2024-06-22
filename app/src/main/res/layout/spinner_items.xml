@@ -6,4 +6,7 @@
     android:background="@drawable/rounded_edit_text"
     android:padding="12dp"
     android:textSize="16sp"
+    android:textColor="@color/placeholder"
+    android:textColorHint="@color/placeholder"
+    android:hint="Seleccione"
     xmlns:android="http://schemas.android.com/apk/res/android" />

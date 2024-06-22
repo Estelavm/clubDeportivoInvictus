@@ -1,5 +1,6 @@
 package com.example.platzi
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
@@ -49,6 +50,13 @@ class EditUserActivity : AppCompatActivity() {
             } else {
                 Toast.makeText(this, "Error al actualizar usuario", Toast.LENGTH_SHORT).show()
             }
+        }
+
+        val atrasButton: Button = findViewById(R.id.btn_atras)
+
+        atrasButton.setOnClickListener {
+            val intent = Intent(this, UserProfileActivity::class.java)
+            startActivity(intent)
         }
     }
 }

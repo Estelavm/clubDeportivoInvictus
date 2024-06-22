@@ -31,7 +31,7 @@ class UserProfileActivity : AppCompatActivity() {
             if (dni.isNotEmpty()) {
                 val user = db.getUserByDNI(dni)
                 if (user != null) {
-                    textViewUserData.text = "Name: ${user.name} ${user.lastName}\nDocument: ${user.docType} ${user.docNumber}\nType: ${user.userType}"
+                    textViewUserData.text = "Nombre: ${user.name} ${user.lastName}\nTipo y N° de Documento: ${user.docType} ${user.docNumber}\nTipo de Usuario: ${user.userType}"
                     textViewUserData.visibility = View.VISIBLE
                     buttonEdit.visibility = View.VISIBLE
                     buttonDelete.visibility = View.VISIBLE
@@ -61,6 +61,13 @@ class UserProfileActivity : AppCompatActivity() {
                 }
             } else {
                 Toast.makeText(this, "Ingrese un DNI", Toast.LENGTH_SHORT).show()
+            }
+
+            val atrasButton: Button = findViewById(R.id.btn_atras)
+
+            atrasButton.setOnClickListener {
+                val intent = Intent(this, BPrincipalActivity::class.java)
+                startActivity(intent)
             }
         }
     }

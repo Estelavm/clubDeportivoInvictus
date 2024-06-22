@@ -39,7 +39,8 @@
                 android:layout_width="120dp"
                 android:layout_height="120dp"
                 android:layout_gravity="center_horizontal"
-                android:layout_margin="24dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="12dp"
                 android:src="@drawable/logo"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -87,7 +88,7 @@
                 android:layout_width="360dp"
                 android:layout_height="60dp"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginBottom="22dp"
+                android:layout_marginBottom="8dp"
                 android:background="@drawable/rounded_edit_text"
                 android:hint="@string/hint_ingrese_aqu_su_apellido"
                 android:inputType="text"
@@ -123,7 +124,9 @@
                         android:layout_height="60dp"
                         android:layout_gravity="center_horizontal"
                         android:background="@drawable/rounded_edit_text"
-                        android:padding="0dp" />
+                        android:paddingStart="11.5dp"
+                        android:textColorHint="@color/placeholder"
+                        />
                 </LinearLayout>
 
 
@@ -158,12 +161,13 @@
 
                 </LinearLayout>
             </LinearLayout>
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Seleccione tipo de usuario"
                 android:textColor="@color/white"
-                android:textSize="16sp"
+                android:textSize="20sp"
                 android:layout_marginTop="16dp"
                 android:layout_gravity="center_horizontal" />
             <RadioGroup
@@ -179,7 +183,7 @@
                     android:layout_height="wrap_content"
                     android:text="Socio"
                     android:textColor="@color/white"
-                    android:textSize="16sp" />
+                    android:textSize="20sp" />
 
                 <RadioButton
                     android:id="@+id/radio_no_socio"
@@ -187,14 +191,14 @@
                     android:layout_height="wrap_content"
                     android:text="No Socio"
                     android:textColor="@color/white"
-                    android:textSize="16sp" />
+                    android:textSize="20sp" />
 
             </RadioGroup>
             <LinearLayout
                 android:layout_width="360dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="16dp"
                 android:orientation="horizontal">
 
                 <LinearLayout
@@ -204,7 +208,7 @@
                     android:orientation="horizontal">
 
                     <Button
-                        android:id="@+id/btn_login"
+                        android:id="@+id/btn_limpiar"
                         android:layout_width="131.5dp"
                         android:layout_height="68dp"
                         android:backgroundTint="@color/btn"
