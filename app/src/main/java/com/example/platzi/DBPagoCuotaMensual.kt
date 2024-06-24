@@ -91,6 +91,17 @@ class DBPagoCuotaMensual : AppCompatActivity() {
             }
         }
 
+        btnVerCarnet.setOnClickListener {
+            val dni = editTextDni.text.toString().trim()
+            if (dni.isNotEmpty()) {
+                val intent = Intent(this, CBCarnetDelSocio::class.java)
+                intent.putExtra("docNumber", dni)
+                startActivity(intent)
+            } else {
+                Toast.makeText(this, "Ingrese un DNI válido", Toast.LENGTH_SHORT).show()
+            }
+        }
+
         val comprobanteButton = findViewById<Button>(R.id.btn_comprobante)
         comprobanteButton.setOnClickListener {
             val dni = editTextDni.text.toString().trim()

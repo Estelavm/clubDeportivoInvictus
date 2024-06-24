@@ -62,13 +62,12 @@ class UserProfileActivity : AppCompatActivity() {
             } else {
                 Toast.makeText(this, "Ingrese un DNI", Toast.LENGTH_SHORT).show()
             }
+        }
 
-            val atrasButton: Button = findViewById(R.id.btn_atras)
-
-            atrasButton.setOnClickListener {
-                val intent = Intent(this, BPrincipalActivity::class.java)
-                startActivity(intent)
-            }
+        val atrasButton: Button = findViewById(R.id.btn_atras)
+        atrasButton.setOnClickListener {
+            val intent = Intent(this, BPrincipalActivity::class.java)
+            startActivity(intent)
         }
     }
 }

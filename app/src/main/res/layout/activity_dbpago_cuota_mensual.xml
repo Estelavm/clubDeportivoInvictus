@@ -21,9 +21,8 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -38,101 +37,99 @@
             app:shapeAppearanceOverlay="@style/RoundedImageView" />
 
         <TextView
-            android:layout_width="match_parent"
+            android:id="@+id/TextDNI"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:gravity="center_horizontal"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginStart="0dp"
+            android:layout_marginEnd="90dp"
             android:text="Ingrese el DNI del Socio"
             android:textColor="@color/white"
-            android:textSize="26sp" />
+            android:textSize="16dp" />
 
         <EditText
             android:id="@+id/editText1"
-            android:layout_width="160dp"
-            android:layout_height="60dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="4dp"
-            android:background="@drawable/rounded_edit_text_white"
+            android:layout_width="360dp"
+            android:layout_height="56dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/rounded_edit_text"
             android:inputType="text"
-            android:padding="20dp"
-            android:textColorHint="@color/placeholder"
+            android:padding="16dp"
             android:textColor="@color/white"
+            android:textColorHint="@color/placeholder"
             android:textSize="16dp"
-            android:hint="DNI" />
+            android:hint="DNI"
+            android:layout_gravity="center_horizontal"
+            app:layout_constraintTop_toBottomOf="@+id/TextDNI"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5" />
 
         <TextView
-            android:layout_width="match_parent"
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:gravity="center_horizontal"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginStart="0dp"
+            android:layout_marginEnd="120dp"
+            android:layout_marginTop="16dp"
             android:text="Monto a pagar"
             android:textColor="@color/white"
-            android:textSize="26sp" />
+            android:textSize="16dp"  />
 
         <EditText
             android:id="@+id/editText2"
-            android:layout_width="160dp"
-            android:layout_height="60dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="4dp"
-            android:background="@drawable/rounded_edit_text_white"
+            android:layout_width="360dp"
+            android:layout_height="56dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/rounded_edit_text"
             android:inputType="text"
-            android:padding="20dp"
+            android:padding="16dp"
             android:textColor="@color/white"
             android:textColorHint="@color/placeholder"
             android:textSize="16dp"
-            android:hint="Monto" />
+            android:hint="Monto"
+            android:layout_gravity="center_horizontal"
+            app:layout_constraintTop_toBottomOf="@id/textView2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5" />
 
         <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:gravity="center_horizontal"
-            android:text="Forma de pago"
-            android:textColor="@color/white"
-            android:textSize="26sp" />
-
-        <!-- Agregamos el ID al RadioGroup -->
-        <RadioGroup
-            android:id="@+id/radioGroup"
-            android:layout_width="match_parent"
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:gravity="center_horizontal">
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="16dp"
+            android:text="Forma de pago"
+            android:textColor="@color/white"
+            android:textSize="22dp" />
+
+        <RadioGroup
+            android:id="@+id/radioGroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:orientation="horizontal">
 
             <RadioButton
                 android:id="@+id/radioButton"
-                android:layout_width="130dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Efectivo"
-                android:textColor="#BAB8B8"
-                android:textSize="26sp" />
+                android:textColor="@color/white"
+                android:textSize="20sp" />
 
             <RadioButton
                 android:id="@+id/radioButton2"
-                android:layout_width="130dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:text="Tarjeta"
-                android:textColor="#BAB8B8"
-                android:textSize="26sp" />
+                android:textColor="@color/white"
+                android:textSize="20sp" />
         </RadioGroup>
-
-        <Button
-            android:id="@+id/btn_pagar"
-            android:layout_width="150dp"
-            android:layout_height="68dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="30dp"
-            android:backgroundTint="@color/btn"
-            android:insetTop="0dp"
-            android:insetBottom="0dp"
-            android:textColor="@color/white"
-            android:fontFamily="@font/leaguespartan_bold"
-            android:text="PAGAR"
-            android:textSize="20sp"
-            app:cornerRadius="16dp"
-            app:strokeWidth=".4dp" />
 
         <LinearLayout
             android:layout_width="360dp"
@@ -143,8 +140,9 @@
 
             <Button
                 android:id="@+id/btn_atras"
-                android:layout_width="150dp"
+                android:layout_width="0dp"
                 android:layout_height="68dp"
+                android:layout_weight="1"
                 android:layout_gravity="center_horizontal"
                 android:backgroundTint="@color/btn"
                 android:insetTop="0dp"
@@ -156,38 +154,73 @@
                 app:cornerRadius="16dp"
                 app:strokeWidth=".4dp" />
 
+            <View
+                android:layout_width="16dp"
+                android:layout_height="0dp" />
+
             <Button
-                android:id="@+id/btn_comprobante"
-                android:layout_width="180dp"
+                android:id="@+id/btn_pagar"
+                android:layout_width="0dp"
                 android:layout_height="68dp"
-                android:layout_marginStart="30dp"
+                android:layout_weight="1"
+                android:layout_gravity="center_horizontal"
                 android:backgroundTint="@color/btn"
                 android:insetTop="0dp"
                 android:insetBottom="0dp"
                 android:textColor="@color/white"
                 android:fontFamily="@font/leaguespartan_bold"
-                android:text="Comprobante"
+                android:text="PAGAR"
                 android:textSize="20sp"
                 app:cornerRadius="16dp"
                 app:strokeWidth=".4dp" />
         </LinearLayout>
 
+
+        <LinearLayout
+        android:layout_width="360dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="30dp"
+        android:orientation="horizontal">
+
         <Button
             android:id="@+id/btn_ver_carnet"
-            android:layout_width="150dp"
+            android:layout_width="0dp"
             android:layout_height="68dp"
+            android:layout_weight="1"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="20dp"
             android:backgroundTint="@color/btn"
             android:insetTop="0dp"
             android:insetBottom="0dp"
             android:textColor="@color/white"
             android:fontFamily="@font/leaguespartan_bold"
             android:text="Ver Carnet"
-            android:textSize="20sp"
             android:visibility="gone"
+            android:textSize="20sp"
             app:cornerRadius="16dp"
             app:strokeWidth=".4dp" />
+
+            <View
+                android:layout_width="16dp"
+                android:layout_height="0dp" />
+
+        <Button
+            android:id="@+id/btn_comprobante"
+            android:layout_width="0dp"
+            android:layout_height="68dp"
+            android:layout_weight="1"
+            android:layout_gravity="center_horizontal"
+            android:backgroundTint="@color/btn"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            android:textColor="@color/white"
+            android:fontFamily="@font/leaguespartan_bold"
+            android:text="Comprobante"
+            android:textSize="20sp"
+            app:cornerRadius="16dp"
+            app:strokeWidth=".4dp" />
+
+    </LinearLayout>
 
     </LinearLayout>
 
