@@ -22,7 +22,7 @@
             android:name=".EBDatosNoSocio"
             android:exported="false" />
         <activity
-            android:name=".DCMorosos"
+            android:name=".MorososActivity"
             android:exported="false" />
         <activity
             android:name=".DBPagoCuotaMensual"
@@ -39,8 +39,6 @@
         <activity
             android:name=".BPrincipalActivity"
             android:exported="false" />
-        <activity android:name=".UserDetailsActivity"/>
-        <activity android:name=".UserListActivity"/>
         <activity android:name=".UserProfileActivity"/>
         <activity android:name=".EditUserActivity" />
         <activity android:name=".ComprobantePagoActivity" />

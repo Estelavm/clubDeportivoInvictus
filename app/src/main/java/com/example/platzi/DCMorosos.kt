@@ -1,66 +1,73 @@
 package com.example.platzi
 
-import android.content.Intent
 import android.os.Bundle
-import android.widget.Button
-import android.widget.GridLayout
-import android.widget.ImageView
-import android.widget.TextView
-import androidx.activity.enableEdgeToEdge
+import android.widget.ListView
 import androidx.appcompat.app.AppCompatActivity
+import com.example.platzi.model.Delinquent
+import com.example.platzi.adapter.DelinquentAdapter
 
-class DCMorosos : AppCompatActivity() {
+class MorososActivity : AppCompatActivity() {
+
+    private lateinit var listViewMorosos: ListView
+    private lateinit var dbHelper: DatabaseHelper
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
         setContentView(R.layout.activity_dcmorosos)
 
-        val logoButton: ImageView = findViewById(R.id.logo)
-        logoButton.setOnClickListener {
-            val intent = Intent(this, BPrincipalActivity::class.java)
-            startActivity(intent)
-        }
+        listViewMorosos = findViewById(R.id.listViewMorosos)
+        dbHelper = DatabaseHelper.getInstance(this)
 
-        val atrasButton: Button = findViewById(R.id.btn_atras)
-        atrasButton.setOnClickListener {
-            val intent = Intent(this, DAPagoSocio::class.java)
-            startActivity(intent)
-        }
+        val morososList = getMorosos() // Obtener la lista de socios morosos
 
-        val gridLayout: GridLayout = findViewById(R.id.gridLayout)
-
-        // Simulación de datos de los socios morosos
-        val sociosMorosos = obtenerSociosMorosos()
-
-        // Iterar sobre los datos y mostrarlos en el GridLayout
-        for (socio in sociosMorosos) {
-            val textViewNombre = TextView(this)
-            textViewNombre.text = socio.nombre
-            textViewNombre.textSize = 18f
-            textViewNombre.setPadding(16, 16, 16, 16)
-            gridLayout.addView(textViewNombre)
-
-            val textViewDeuda = TextView(this)
-            textViewDeuda.text = socio.deuda
-            textViewDeuda.textSize = 16f
-            textViewDeuda.setPadding(16, 16, 16, 16)
-            gridLayout.addView(textViewDeuda)
-        }
+        val adapter = DelinquentAdapter(this, morososList)
+        listViewMorosos.adapter = adapter
     }
 
-    // Función para simular la consulta a la base de datos
-    private fun obtenerSociosMorosos(): List<SocioMoroso> {
-        // Simulación de datos de los socios morosos
-        val sociosMorosos = mutableListOf<SocioMoroso>()
-        sociosMorosos.add(SocioMoroso("Apellido1, Nombre1", "Deuda1"))
-        sociosMorosos.add(SocioMoroso("Apellido2, Nombre2", "Deuda2"))
-        sociosMorosos.add(SocioMoroso("Apellido3, Nombre3", "Deuda3"))
-        // Agregar más datos según sea necesario
+    private fun getMorosos(): List<Delinquent> {
+        val morososList = mutableListOf<Delinquent>()
 
-        return sociosMorosos
+        val cursor = dbHelper.getAllMorosos()
+        cursor.use {
+            if (it.moveToFirst()) {
+                do {
+                    val nombre = it.getString(it.getColumnIndexOrThrow("name"))
+                    val apellido = it.getString(it.getColumnIndexOrThrow("last_name"))
+                    val tipoDocumento = it.getString(it.getColumnIndexOrThrow("doc_type"))
+                    val numeroDocumento = it.getString(it.getColumnIndexOrThrow("doc_number"))
+                    val cuotasAdeudadas = it.getInt(it.getColumnIndexOrThrow("cuotas_adeudadas"))
+                    val cuotaMensual = dbHelper.getMonthlyFee(numeroDocumento)
+
+                    val totalAdeudado = cuotasAdeudadas * cuotaMensual
+
+                    morososList.add(
+                        Delinquent(
+                            nombre,
+                            apellido,
+                            tipoDocumento,
+                            numeroDocumento,
+                            cuotasAdeudadas,
+                            totalAdeudado
+                        )
+                    )
+                } while (it.moveToNext())
+            } else {
+                // Si no hay usuarios morosos en la base de datos, agregar usuarios ficticios con cuotas mensuales ficticias
+                morososList.addAll(getFictitiousDelinquents())
+            }
+        }
+
+        return morososList
+    }
+
+    private fun getFictitiousDelinquents(): List<Delinquent> {
+        // Aquí defines usuarios ficticios con cuotas mensuales ficticias
+        val fictitiousUsers = listOf(
+            Delinquent("Juan", "Pérez", "DNI", "12345678", 3, 1500.0),
+            Delinquent("María", "Gómez", "CI", "87654321", 2, 1000.0),
+            Delinquent("Pedro", "Martínez", "DNI", "56789123", 1, 5000.0)
+            // Agrega más usuarios ficticios según sea necesario
+        )
+        return fictitiousUsers
     }
 }
-
-// Clase simple para representar a un socio moroso
-data class SocioMoroso(val nombre: String, val deuda: String)

@@ -32,9 +32,9 @@ class EditUserActivity : AppCompatActivity() {
         ArrayAdapter.createFromResource(
             this,
             R.array.tipos_array,
-            android.R.layout.simple_spinner_item
+            R.layout.spinner_items
         ).also { adapter ->
-            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            adapter.setDropDownViewResource(R.layout.spinner_items)
             spinnerDocType.adapter = adapter
         }
 
@@ -77,6 +77,7 @@ class EditUserActivity : AppCompatActivity() {
                 }
             }
         }
+
 
         val atrasButton: Button = findViewById(R.id.btn_atras)
         atrasButton.setOnClickListener {

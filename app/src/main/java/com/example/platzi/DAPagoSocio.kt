@@ -30,7 +30,7 @@ class DAPagoSocio : AppCompatActivity() {
         val listadoMorososButton: Button = findViewById(R.id.btn_listado_morosos)
 
         listadoMorososButton.setOnClickListener {
-            val intent = Intent(this, DCMorosos::class.java)
+            val intent = Intent(this, MorososActivity::class.java)
             startActivity(intent)
         }
 

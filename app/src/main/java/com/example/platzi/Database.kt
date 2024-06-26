@@ -323,6 +323,16 @@ class DatabaseHelper private constructor(context: Context) : SQLiteOpenHelper(co
         return Pair(nombre, apellido)
     }
 
+    fun getAllMorosos(): Cursor {
+        val db = readableDatabase
+        val query = """
+        SELECT * FROM $TABLE_USER_DATA
+        WHERE $COLUMN_SUBSCRIPTION_ACTIVE = 1
+        AND $COLUMN_LAST_PAYMENT_DATE < date('now', '-1 month')
+    """
+        return db.rawQuery(query, null)
+    }
+
 
     override fun close() {
         INSTANCE = null
