@@ -7,23 +7,23 @@ import android.widget.ImageView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 
-class DAPagoSocio : AppCompatActivity() {
+class MembershipPay : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_dapago_socio)
+        setContentView(R.layout.activity_membership_pay)
 
         val logoButton: ImageView = findViewById(R.id.logo)
 
         logoButton.setOnClickListener {
-            val intent = Intent(this, BPrincipalActivity::class.java)
+            val intent = Intent(this, PrincipalActivity::class.java)
             startActivity(intent)
         }
 
         val pagoCuotaMenualButton: Button = findViewById(R.id.btn_pago_cuota_mensual)
 
         pagoCuotaMenualButton.setOnClickListener {
-            val intent = Intent(this, DBPagoCuotaMensual::class.java)
+            val intent = Intent(this, CollectMonthlyFee::class.java)
             startActivity(intent)
         }
 
@@ -37,7 +37,7 @@ class DAPagoSocio : AppCompatActivity() {
         val atrasButton: Button = findViewById(R.id.btn_atras)
 
         atrasButton.setOnClickListener {
-            val intent = Intent(this, BPrincipalActivity::class.java)
+            val intent = Intent(this, PrincipalActivity::class.java)
             startActivity(intent)
         }
 

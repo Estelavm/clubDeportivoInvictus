@@ -1,14 +1,11 @@
 package com.example.platzi
 
-import android.content.ContentValues
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
-import android.widget.RadioButton
 import android.widget.RadioGroup
-import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -16,25 +13,25 @@ import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 
-class DBPagoCuotaMensual : AppCompatActivity() {
+class CollectMonthlyFee : AppCompatActivity() {
     private lateinit var db: DatabaseHelper
     private lateinit var btnVerCarnet: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_dbpago_cuota_mensual)
+        setContentView(R.layout.activity_collect_monthly_fee)
         db = DatabaseHelper.getInstance(this)
 
         val logoButton: ImageView = findViewById(R.id.logo)
         logoButton.setOnClickListener {
-            val intent = Intent(this, BPrincipalActivity::class.java)
+            val intent = Intent(this, PrincipalActivity::class.java)
             startActivity(intent)
         }
 
         val atrasButton: Button = findViewById(R.id.btn_atras)
         atrasButton.setOnClickListener {
-            val intent = Intent(this, DAPagoSocio::class.java)
+            val intent = Intent(this, MembershipPay::class.java)
             startActivity(intent)
         }
 
@@ -94,7 +91,7 @@ class DBPagoCuotaMensual : AppCompatActivity() {
         btnVerCarnet.setOnClickListener {
             val dni = editTextDni.text.toString().trim()
             if (dni.isNotEmpty()) {
-                val intent = Intent(this, CBCarnetDelSocio::class.java)
+                val intent = Intent(this, MembershipCard::class.java)
                 intent.putExtra("docNumber", dni)
                 startActivity(intent)
             } else {

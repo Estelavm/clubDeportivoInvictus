@@ -17,7 +17,7 @@ class MembershipPaymentReceipt : AppCompatActivity() {
         val logoButton: ImageView = findViewById(R.id.logo)
 
         logoButton.setOnClickListener {
-            val intent = Intent(this, BPrincipalActivity::class.java)
+            val intent = Intent(this, PrincipalActivity::class.java)
             startActivity(intent)
         }
 
@@ -42,7 +42,7 @@ class MembershipPaymentReceipt : AppCompatActivity() {
         val atrasButton: Button = findViewById(R.id.btn_atras)
 
         atrasButton.setOnClickListener {
-            val intent = Intent(this, DBPagoCuotaMensual::class.java)
+            val intent = Intent(this, CollectMonthlyFee::class.java)
             startActivity(intent)
         }
     }

@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="@color/bg"
     android:orientation="vertical"
-    tools:context=".EBDatosNoSocio">
+    tools:context=".NonMemberData">
 
     <ImageView
         android:layout_width="440dp"

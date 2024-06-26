@@ -8,7 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import java.text.SimpleDateFormat
 import java.util.*
 
-class ComprobantePagoActivity : AppCompatActivity() {
+class ActivityPaymentReceipt : AppCompatActivity() {
     private lateinit var db: DatabaseHelper
     private lateinit var txtNombreApellido: TextView
     private lateinit var txtFechaPago: TextView
@@ -18,7 +18,7 @@ class ComprobantePagoActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_comprobante_pago)
+        setContentView(R.layout.activity_payment_receipt)
         db = DatabaseHelper.getInstance(this)
 
         // Obtener datos del intent
@@ -48,7 +48,7 @@ class ComprobantePagoActivity : AppCompatActivity() {
 
         val atrasButton: Button = findViewById(R.id.btn_atras)
         atrasButton.setOnClickListener {
-            val intent = Intent(this, FARegistroDeActividad::class.java)
+            val intent = Intent(this, ActivityRegistration::class.java)
             startActivity(intent)
         }
     }

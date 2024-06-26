@@ -13,24 +13,24 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.imageview.ShapeableImageView
 
-class CARegistrarUsuario : AppCompatActivity() {
+class RegisterUser : AppCompatActivity() {
 
     private lateinit var databaseHelper: DatabaseHelper
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_caregistrar_usuario)
+        setContentView(R.layout.activity_register_user)
         databaseHelper = DatabaseHelper.getInstance(this)
 
         val logoImageView: ShapeableImageView = findViewById(R.id.logo)
         logoImageView.setOnClickListener {
-            startActivity(Intent(this, BPrincipalActivity::class.java))
+            startActivity(Intent(this, PrincipalActivity::class.java))
         }
 
         val atrasButton = findViewById<Button>(R.id.btn_atras)
         atrasButton.setOnClickListener {
-            startActivity(Intent(this, BPrincipalActivity::class.java))
+            startActivity(Intent(this, PrincipalActivity::class.java))
         }
 
         val ingresarButton = findViewById<Button>(R.id.btn_ingresar)
@@ -48,9 +48,9 @@ class CARegistrarUsuario : AppCompatActivity() {
                     Toast.makeText(this, "User registered successfully", Toast.LENGTH_SHORT).show()
 
                     val intent = if (isSocio) {
-                        Intent(this, DBPagoCuotaMensual::class.java)
+                        Intent(this, CollectMonthlyFee::class.java)
                     } else {
-                        Intent(this, FARegistroDeActividad::class.java)
+                        Intent(this, ActivityRegistration::class.java)
                     }
                     startActivity(intent)
                 } else {

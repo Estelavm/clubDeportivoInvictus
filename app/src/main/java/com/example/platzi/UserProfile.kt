@@ -66,7 +66,7 @@ class UserProfileActivity : AppCompatActivity() {
 
         val atrasButton: Button = findViewById(R.id.btn_atras)
         atrasButton.setOnClickListener {
-            val intent = Intent(this, BPrincipalActivity::class.java)
+            val intent = Intent(this, PrincipalActivity::class.java)
             startActivity(intent)
         }
     }

@@ -16,32 +16,32 @@
             android:name=".MembershipPaymentReceipt"
             android:exported="false" />
         <activity
-            android:name=".FARegistroDeActividad"
+            android:name=".ActivityRegistration"
             android:exported="false" />
         <activity
-            android:name=".EBDatosNoSocio"
+            android:name=".NonMemberData"
             android:exported="false" />
         <activity
             android:name=".MorososActivity"
             android:exported="false" />
         <activity
-            android:name=".DBPagoCuotaMensual"
+            android:name=".CollectMonthlyFee"
             android:exported="false" />
         <activity
-            android:name=".DAPagoSocio"
+            android:name=".MembershipPay"
             android:exported="false" />
         <activity
-            android:name=".CBCarnetDelSocio"
+            android:name=".MembershipCard"
             android:exported="false" />
         <activity
-            android:name=".CARegistrarUsuario"
+            android:name=".RegisterUser"
             android:exported="false" />
         <activity
-            android:name=".BPrincipalActivity"
+            android:name=".PrincipalActivity"
             android:exported="false" />
         <activity android:name=".UserProfileActivity"/>
         <activity android:name=".EditUserActivity" />
-        <activity android:name=".ComprobantePagoActivity" />
+        <activity android:name=".ActivityPaymentReceipt" />
 
         <activity
             android:name=".MainActivity"

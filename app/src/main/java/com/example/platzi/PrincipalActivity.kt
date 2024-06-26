@@ -6,12 +6,12 @@ import android.widget.Button
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 
-class BPrincipalActivity : AppCompatActivity() {
+class PrincipalActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
 
-        setContentView(R.layout.activity_bprincipal)
+        setContentView(R.layout.activity_principal)
 
         // Encontrar el nuevo botón en el layout
         val registrarUsuariosButton: Button = findViewById(R.id.btn_registrar_usuarios)
@@ -19,21 +19,21 @@ class BPrincipalActivity : AppCompatActivity() {
         // Configurar el listener para el botón
         registrarUsuariosButton.setOnClickListener {
             // Crear un Intent para iniciar la nueva actividad
-            val intent = Intent(this, CARegistrarUsuario::class.java)  // Aquí puedes decidir qué actividad iniciar
+            val intent = Intent(this, RegisterUser::class.java)  // Aquí puedes decidir qué actividad iniciar
             startActivity(intent)
         }
 
         val pagoSocioButton: Button = findViewById(R.id.btn_pago_socio)
 
         pagoSocioButton.setOnClickListener {
-            val intent = Intent(this, DAPagoSocio::class.java)
+            val intent = Intent(this, MembershipPay::class.java)
             startActivity(intent)
         }
 
         val pagoActividadButton: Button = findViewById(R.id.btn_pago_actividad)
 
         pagoActividadButton.setOnClickListener {
-            val intent = Intent(this, FARegistroDeActividad::class.java)
+            val intent = Intent(this, ActivityRegistration::class.java)
             startActivity(intent)
         }
 

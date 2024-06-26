@@ -8,12 +8,10 @@ import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.RadioButton
-import android.widget.RadioGroup
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.example.platzi.ComprobantePagoActivity
 
-class FARegistroDeActividad : AppCompatActivity() {
+class ActivityRegistration : AppCompatActivity() {
 
     private lateinit var basketCheckBox: CheckBox
     private lateinit var futbolCheckBox: CheckBox
@@ -29,19 +27,19 @@ class FARegistroDeActividad : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_faregistro_de_actividad)
+        setContentView(R.layout.activity_registration)
 
         val logoButton: ImageView = findViewById(R.id.logo)
 
         logoButton.setOnClickListener {
-            val intent = Intent(this, BPrincipalActivity::class.java)
+            val intent = Intent(this, PrincipalActivity::class.java)
             startActivity(intent)
         }
 
         val atrasButton: Button = findViewById(R.id.btn_atras)
 
         atrasButton.setOnClickListener {
-            val intent = Intent(this, BPrincipalActivity::class.java)
+            val intent = Intent(this, PrincipalActivity::class.java)
             startActivity(intent)
         }
 
@@ -65,7 +63,7 @@ class FARegistroDeActividad : AppCompatActivity() {
             if (dni.isNotEmpty()) {
                 val actividadesSeleccionadas = obtenerActividadesSeleccionadas()
                 val formaDePago = if (formaDePagoEfectivoRadioButton.isChecked) "Efectivo" else "Tarjeta"
-                val intent = Intent(this, ComprobantePagoActivity::class.java).apply {
+                val intent = Intent(this, ActivityPaymentReceipt::class.java).apply {
                     putExtra("dni", dni)
                     putExtra("actividades", actividadesSeleccionadas)
                     putExtra("formaDePago", formaDePago)

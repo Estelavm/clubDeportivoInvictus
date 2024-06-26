@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/bg"
-    tools:context=".FARegistroDeActividad">
+    tools:context=".ActivityRegistration">
 
     <ImageView
         android:id="@+id/imageView2"

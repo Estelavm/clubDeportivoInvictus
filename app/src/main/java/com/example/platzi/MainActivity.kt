@@ -26,7 +26,7 @@ class MainActivity : AppCompatActivity() {
             val password = passwordEditText.text.toString()
 
             if (db.validateUser(username, password)) {
-                val intent = Intent(this, BPrincipalActivity::class.java)
+                val intent = Intent(this, PrincipalActivity::class.java)
                 startActivity(intent)
                 finish()
             } else {

@@ -16,7 +16,7 @@ class MorososActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_dcmorosos)
+        setContentView(R.layout.activity_list_overdue_members)
 
         listViewMorosos = findViewById(R.id.listViewMorosos)
         dbHelper = DatabaseHelper.getInstance(this)
@@ -28,7 +28,7 @@ class MorososActivity : AppCompatActivity() {
         listViewMorosos.adapter = adapter
 
         btnAtras.setOnClickListener {
-            val intent = Intent(this, DAPagoSocio::class.java)
+            val intent = Intent(this, MembershipPay::class.java)
             startActivity(intent)
             finish()
         }

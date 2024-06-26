@@ -10,21 +10,21 @@ import androidx.appcompat.app.AppCompatActivity
 import java.text.SimpleDateFormat
 import java.util.*
 
-class EBDatosNoSocio : AppCompatActivity() {
+class NonMemberData : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_ebdatos_no_socio)
+        setContentView(R.layout.activity_non_member_data)
         enableEdgeToEdge()
 
         val logoButton: ImageView = findViewById(R.id.logo)
         logoButton.setOnClickListener {
-            startActivity(Intent(this, BPrincipalActivity::class.java))
+            startActivity(Intent(this, PrincipalActivity::class.java))
         }
 
         val atrasButton: Button = findViewById(R.id.btn_atras)
         atrasButton.setOnClickListener {
-            startActivity(Intent(this, CARegistrarUsuario::class.java))
+            startActivity(Intent(this, RegisterUser::class.java))
         }
 
             // Obtener datos del intent

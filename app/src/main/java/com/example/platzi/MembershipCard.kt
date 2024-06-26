@@ -8,22 +8,22 @@ import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 
-class CBCarnetDelSocio : AppCompatActivity() {
+class MembershipCard : AppCompatActivity() {
     private lateinit var db: DatabaseHelper
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_cbcarnet_del_socio)
+        setContentView(R.layout.activity_membership_card)
         enableEdgeToEdge()
         db = DatabaseHelper.getInstance(this)
 
         val logoButton: ImageView = findViewById(R.id.logo)
         logoButton.setOnClickListener {
-            startActivity(Intent(this, BPrincipalActivity::class.java))
+            startActivity(Intent(this, PrincipalActivity::class.java))
         }
 
         val atrasButton: Button = findViewById(R.id.btn_atras)
         atrasButton.setOnClickListener {
-            startActivity(Intent(this, CARegistrarUsuario::class.java))
+            startActivity(Intent(this, CollectMonthlyFee::class.java))
         }
 
         val textViewNombre: TextView = findViewById(R.id.textView_nombre)
