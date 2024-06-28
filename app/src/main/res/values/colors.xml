@@ -7,6 +7,5 @@
     <color name="placeholder">#939393</color>
     <color name="rectangles">#001530</color>
     <color name="casco">#C5830B</color>
-
-
+    <color name="logo_stroke">#4393FF</color>
 </resources>

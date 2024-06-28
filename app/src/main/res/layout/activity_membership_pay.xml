@@ -33,7 +33,9 @@
             android:layout_width="120dp"
             android:layout_height="120dp"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="60dp"
+            android:layout_marginTop="40dp"
+            app:strokeWidth=".8dp"
+            app:strokeColor="@color/logo_stroke"
             android:src="@drawable/logo"
             app:shapeAppearanceOverlay="@style/RoundedImageView" />
 
@@ -88,8 +90,8 @@
                 android:id="@+id/btn_atras"
                 android:layout_width="150dp"
                 android:layout_height="68dp"
-                android:layout_marginBottom="60dp"
                 android:backgroundTint="@color/btn"
+                android:layout_marginBottom="60dp"
                 android:insetTop="0dp"
                 android:insetBottom="0dp"
                 android:textColor="@color/white"
